@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.dao.InterestAreaMapper">
+	<insert id="addArea"
+		parameterType="com.ssafy.happyhouse.dto.InterestAreaDto">
+		insert into interest_area (userid, house_no,
+		interest_dong, interest_place, dealAmount, latitude, longitude)
+		values
+		(#{userid}, #{house_no}, #{interest_dong},#{interest_place},
+		#{dealAmount}, #{latitude}, #{longitude})
+	</insert>
+
+	<select id="searchAll"
+		resultType="com.ssafy.happyhouse.dto.InterestAreaDto">
+		select no, userid, house_no, interest_dong, interest_place,
+		dealAmount, latitude, longitude
+		from interest_area
+		<!-- <if test="word != null and word != ''"> <if test="key == 'subject'"> 
+			where subject like concat('%', #{word}, '%') </if> <if test="key != 'subject'"> 
+			where ${key} = #{word} </if> </if> -->
+		order by no
+	</select>
+
+	<select id="search" parameterType="string"
+		resultType="com.ssafy.happyhouse.dto.InterestAreaDto">
+		select no, userid, house_no, interest_dong, interest_place,
+		dealAmount, latitude, longitude
+		from interest_area
+		where userid =
+		#{userid}
+	</select>
+
+	<select id="getArticle" parameterType="int"
+		resultType="com.ssafy.happyhouse.dto.InterestAreaDto">
+		select no, userid, house_no, interest_dong, interest_place,
+		dealAmount, latitude, longitude
+		from interest_area
+		where no = #{no}
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*)
+		from
+		interest_area
+	</select>
+
+	<update id="updateArea"
+		parameterType="com.ssafy.happyhouse.dto.InterestAreaDto">
+		update interest_area set
+		userid = #{userid},
+		house_no=#{house_no},interest_dong = #{interest_dong},interest_place =
+		#{interest_place}
+		, dealAmount=#{dealAmount}, latitude = #{latitude},
+		longitude = #{longitude}
+		where no = #{no}
+	</update>
+
+	<delete id="deleteArea" parameterType="int">
+		delete from interest_area
+		where no = #{no}
+	</delete>
+
+	<select id="afterAdd" resultType="java.lang.Integer">
+		SELECT MAX(no) FROM
+		interest_area
+	</select>
+
+</mapper>

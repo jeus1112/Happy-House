@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.dao.NoticeMapper">
+	<insert id="writeArticle"
+		parameterType="com.ssafy.happyhouse.dto.NoticeDto">
+		insert into notice (userid, title, content, regtime)
+		values (#{userid}, #{title}, #{content}, now())
+	</insert>
+
+	<select id="listArticle"
+		resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		select no, userid, title, content, regtime
+		from notice
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*)
+		from notice
+	</select>
+
+	<select id="getArticle" parameterType="int"
+		resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		select no, userid, title, content, regtime
+		from notice
+		where
+		no = #{no}
+	</select>
+
+	<update id="modifyArticle"
+		parameterType="com.ssafy.happyhouse.dto.NoticeDto">
+		update notice set
+		userid = #{userid}, title = #{title},
+		content = #{content}
+		where no = #{no}
+	</update>
+
+	<delete id="deleteArticle" parameterType="int">
+		delete from notice
+		where no = #{no}
+	</delete>
+
+	<select id="afterAdd" resultType="java.lang.Integer">
+		SELECT MAX(no) FROM notice
+	</select>
+
+	<select id="findArticleById" parameterType="java.lang.String"
+		resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		select no, userid, title, content, regtime
+		from notice
+		where
+		userid like concat('%',#{userid},'%')
+	</select>
+
+	<select id="findArticleByTitle" parameterType="java.lang.String"
+		resultType="com.ssafy.happyhouse.dto.NoticeDto">
+		select no, userid, title, content, regtime
+		from notice
+		where
+		title like concat('%',#{title},'%')
+	</select>
+
+
+</mapper>

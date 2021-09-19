@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.dao.HousejoinMapper">
+	<select id="searchAll"
+		resultType="com.ssafy.happyhouse.dto.HouseJoinDto">
+		select no, dong,
+		aptname, code, dealAmount, buildYear, dealYear, dealMonth, dealDay
+		,
+		area, floor, jibun, type, rentMoney, latitude, longitude from
+		housejoin
+		order by no
+	</select>
+	<select id="search" parameterType="int"
+		resultType="com.ssafy.happyhouse.dto.HouseJoinDto">
+		select no, dong, aptname, code, dealAmount, buildYear,
+		dealYear, dealMonth, dealDay
+		, area, floor, jibun, type, rentMoney,
+		latitude, longitude from housejoin
+		where no = #{no}
+	</select>
+
+	<select id="searchApt"
+		resultType="com.ssafy.happyhouse.dto.HouseJoinDto"
+		parameterType="string">
+		select no, dong, aptname, code, dealAmount, buildYear,
+		dealYear, dealMonth, dealDay
+		, area, floor, jibun, type, rentMoney,
+		latitude, longitude from housejoin
+		where aptname like concat('%',
+		#{aptname} ,'%')
+	</select>
+
+	<select id="searchDong"
+		resultType="com.ssafy.happyhouse.dto.HouseJoinDto"
+		parameterType="string">
+		select no, dong, aptname, code, dealAmount, buildYear,
+		dealYear, dealMonth, dealDay
+		, area, floor, jibun, type, rentMoney,
+		latitude, longitude from housejoin
+		where dong like concat('%', #{dong}
+		,'%')
+	</select>
+
+	<select id="getTotalSearchCount" resultType="int"
+		parameterType="com.ssafy.happyhouse.dto.HouseJoinDto">
+		select count(*) from housejoin
+		<if test="key!='none'">
+			where ${key} like concat('%', #{word} ,'%')
+		</if>
+	</select>
+</mapper>

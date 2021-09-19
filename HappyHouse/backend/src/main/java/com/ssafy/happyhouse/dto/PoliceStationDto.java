@@ -1,0 +1,85 @@
+package com.ssafy.happyhouse.dto;
+
+public class PoliceStationDto {
+
+	private int no;
+	private String office;
+	private String station;
+	private String district_station;
+	private String address;
+	private double latitude;
+	private double longitude;
+
+	public PoliceStationDto() {
+		super();
+	}
+
+	public PoliceStationDto(int no, String office, String station, String district_station, String address,
+			double latitude, double longitude) {
+		super();
+		this.no = no;
+		this.office = office;
+		this.station = station;
+		this.district_station = district_station;
+		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public void setOffice(String office) {
+		this.office = office;
+	}
+
+	public String getStation() {
+		return station;
+	}
+
+	public void setStation(String station) {
+		this.station = station;
+	}
+
+	public String getDistrict_station() {
+		return district_station;
+	}
+
+	public void setDistrict_station(String district_station) {
+		this.district_station = district_station;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+}

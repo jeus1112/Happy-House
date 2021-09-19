@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.dao.SchoolMapper">
+
+
+	<select id="searchAll"
+		resultType="com.ssafy.happyhouse.dto.SchoolDto">
+		select no, school_type, school_name, street_address
+		,
+		latitude, longitude, gu
+		from school
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		select count(*)
+		from board
+	</select>
+
+	<select id="getCount"
+		resultType="com.ssafy.happyhouse.dto.ChartDto">
+		select gu, count(*) cnt
+		from school
+		group by gu
+	</select>
+
+	<select id="getArticle" parameterType="int"
+		resultType="com.ssafy.happyhouse.dto.SchoolDto">
+		select no, school_type, school_name, street_address
+		,
+		latitude, longitude, gu
+		from school
+		where no = #{no}
+	</select>
+
+
+	<select id="afterAdd" resultType="java.lang.Integer">
+		SELECT MAX(no) FROM school
+	</select>
+
+</mapper>
